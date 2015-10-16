@@ -1,6 +1,6 @@
 package impl;
 
-import interfaces.BaseString;
+import interfaces.BaseArrayString;
 import interfaces.Decorator;
 
 import javax.xml.bind.DatatypeConverter;
@@ -9,15 +9,16 @@ import java.io.UnsupportedEncodingException;
 /**
  * Created by GEO on 15.10.15.
  */
-public class Base64Encrypt extends Decorator {
+public class BaseArray64Encrypt extends Decorator {
 
-    public Base64Encrypt(BaseString baseStr) {
+    public BaseArray64Encrypt(BaseArrayString baseStr) {
         super(baseStr);
     }
 
 
     @Override
     public String getOriginalString() {
+
         String string=super.getOriginalString();
         String encString;
         try{

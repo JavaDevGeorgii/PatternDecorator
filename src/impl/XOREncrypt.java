@@ -1,6 +1,6 @@
 package impl;
 
-import interfaces.BaseString;
+import interfaces.BaseArrayString;
 import interfaces.Decorator;
 
 /**
@@ -8,7 +8,7 @@ import interfaces.Decorator;
  */
 public class XOREncrypt extends Decorator {
 
-    public XOREncrypt(BaseString baseStr) {
+    public XOREncrypt(BaseArrayString baseStr) {
         super(baseStr);
     }
 

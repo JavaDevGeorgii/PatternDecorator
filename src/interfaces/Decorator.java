@@ -1,19 +1,20 @@
 package interfaces;
 
+import java.util.List;
+
 /**
  * Created by GEO on 15.10.15.
  */
-public abstract class Decorator implements BaseString{
+public abstract class Decorator implements BaseArrayString {
 
-    protected BaseString baseString;
+    protected BaseArrayString baseArrayString;
 
-    public Decorator(BaseString baseStr) {
-        baseString = baseStr;
+    public Decorator(BaseArrayString baseArrayString) {
+        baseArrayString = baseArrayString;
     }
 
-
     @Override
-    public String getOriginalString() {
+    public List<String> getListString() {
         return null;
     }
 }

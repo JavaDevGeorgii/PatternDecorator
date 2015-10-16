@@ -1,14 +1,14 @@
 package impl;
 
-import interfaces.BaseString;
+import interfaces.BaseArrayString;
 import interfaces.Decorator;
 
 /**
  * Created by GEO on 15.10.15.
  */
-public class Base64Decrypt extends Decorator{
+public class BaseArray64Decrypt extends Decorator{
 
-    public Base64Decrypt(BaseString baseStr) {
+    public BaseArray64Decrypt(BaseArrayString baseStr) {
         super(baseStr);
     }
 
