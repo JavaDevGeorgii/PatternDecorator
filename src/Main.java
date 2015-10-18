@@ -1,51 +1,36 @@
-import impl.BaseArray64Encrypt;
-import impl.ArrayStringReading;
+import impl.*;
 import interfaces.Decorator;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class Main {
 
-    final static String FILE_PATH="/Users/dg/java/PatternDecorator/src/sources";
+    //final static String FILE_PATH="/Users/dg/java/PatternDecorator/src/sources/";
+
+    final static String FILE_PATH_TO_READ="/Users/GEO/Documents/JavaExec/PatternDecorator/PatternDecorator/src/sources/public";
+
+    final static String FILE_PATH_TO_WRITE="/Users/GEO/Documents/JavaExec/PatternDecorator/PatternDecorator/src/sources/public_Encoded_B64";
+    final static String FILE_PATH_TO_DECODE="/Users/GEO/Documents/JavaExec/PatternDecorator/PatternDecorator/src/sources/public_Decoded_B64";
+
+    final static String FILE_PATH_TO_XORENCODE="/Users/GEO/Documents/JavaExec/PatternDecorator/PatternDecorator/src/sources/public_Encoded_XOR";
+    final static String FILE_PATH_TO_XORDECODE="/Users/GEO/Documents/JavaExec/PatternDecorator/PatternDecorator/src/sources/public_Decoded_XOR";
 
     public static void main(String[] args) {
 
-        //String firstStr="It`s my original string!";
+        Decorator base64encode=new BaseArray64Encrypt(new OriginalArray());
+        base64encode.writeTo(base64encode.readFrom(FILE_PATH_TO_READ), FILE_PATH_TO_WRITE);
 
-//        BaseString baseString=new OriginalString(firstStr);
-//
-//        Decorator xorInputStr=new XOREncrypt(originalString);
-//        System.out.println(xorInputStr.getOriginalString());
-//
-//        Decorator base64InputStr=new Base64Encrypt(new OriginalString (null,firstStr));
-//        System.out.println(base64InputStr.getString());
+        Decorator base64Decode=new BaseArray64Decrypt(new OriginalArray());
+        base64Decode.writeTo(base64Decode.readFrom(FILE_PATH_TO_WRITE),FILE_PATH_TO_DECODE);
 
 
-        String firstStr="It`s my original string!";
+        String key = "12345678906636455476325427364526745987654321";
+        Decorator xorEncode=new XOREncrypt(new OriginalArray());
+        xorEncode.writeTo(xorEncode.readFrom(FILE_PATH_TO_READ), FILE_PATH_TO_XORENCODE, key);
 
-        BufferedReader br;
-        Decorator base64InputStr = null;
+        Decorator xorDecode=new XORDecrypt(new OriginalArray());
+        xorDecode.writeTo(xorDecode.readFrom(FILE_PATH_TO_XORENCODE),FILE_PATH_TO_XORDECODE, key);
 
-        try {
-            br=new BufferedReader(new FileReader(FILE_PATH+"/public"));
-            String s;
-            while ((s=br.readLine())!=null){
-                System.out.println(s);
 
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            base64InputStr=new BaseArray64Encrypt(new ArrayStringReading(new FileReader(FILE_PATH+"/public")));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        //System.out.println(base64InputStr.getOriginalString());
+
     }
+
 }

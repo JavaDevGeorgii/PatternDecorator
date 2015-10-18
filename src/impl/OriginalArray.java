@@ -1,46 +1,46 @@
 package impl;
 
 import interfaces.BaseArrayString;
-import interfaces.Decorator;
-import sun.misc.BASE64Encoder;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by GEO on 15.10.15.
  */
-public class BaseArray64Encrypt extends Decorator {
-
-    BASE64Encoder base64Encoder;
-
-    public BaseArray64Encrypt(BaseArrayString baseArrayString) {
-        super(baseArrayString);
-    }
+public class OriginalArray implements BaseArrayString {
 
     private List<String> stringList;
+
+    public OriginalArray() {
+    }
 
     @Override
     public List<String> readFrom(String pathFileFrom) {
 
         stringList = new ArrayList<String>();
-        return super.readFrom(pathFileFrom);
+        String s;
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(pathFileFrom));
+            while ((s = br.readLine()) != null) {
+                stringList.add(s);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return stringList;
     }
 
     @Override
-    public void writeTo(List<String> strings, String pathFileTo) {
-        base64Encoder = new BASE64Encoder();
+    public void writeTo(List<String> stringList, String pathFileTo) {
         BufferedWriter bw = null;
         try {
             bw = new BufferedWriter(new FileWriter(pathFileTo));
-            for (String s : strings) {
-                byte[] utf8 = s.getBytes("UTF-8");
-                String encString = base64Encoder.encode(utf8);
-                bw.append(encString);
+            for (String s : stringList) {
+                bw.append(s);
                 bw.newLine();
                 bw.flush();
             }
@@ -55,6 +55,11 @@ public class BaseArray64Encrypt extends Decorator {
                 e.printStackTrace();
             }
         }
+
     }
 
+    @Override
+    public void writeTo(List<String> stringList, String pathFileTo, String key) {
+
+    }
 }

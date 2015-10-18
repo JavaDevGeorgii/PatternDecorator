@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by GEO on 15.10.15.
+ * Created by GEO on 18.10.15.
  */
-public class XOREncrypt extends Decorator {
+public class XORDecrypt extends Decorator{
 
-    public XOREncrypt(BaseArrayString base) {
+    public XORDecrypt(BaseArrayString base) {
         super(base);
     }
 
@@ -21,12 +21,13 @@ public class XOREncrypt extends Decorator {
     }
 
     @Override
-    public void writeTo(List<String> strArr, String pathEncriptedFileTo) {
-        super.writeTo(strArr, pathEncriptedFileTo);
+    public void writeTo(List<String> strArr, String pathFileTo) {
+        super.writeTo(strArr, pathFileTo);
     }
 
+
     @Override
-    public void writeTo(List<String> innArr, String pathEncriptedFileTo, String secretKey) {
+    public void writeTo(List<String> innArr, String pathDecriptedFileTo, String secretKey) {
 
         List<String> outArr=new ArrayList<String>();
         char[] key = secretKey.toCharArray();
@@ -48,7 +49,7 @@ public class XOREncrypt extends Decorator {
             }
             outArr.add(new String(output));
         }
-        super.writeTo(outArr,pathEncriptedFileTo);
+        super.writeTo(outArr,pathDecriptedFileTo);
     }
 
 }
